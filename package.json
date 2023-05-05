@@ -5,6 +5,7 @@
   "main": "connection.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "mysql -uroot ecommerce_db < db/schema.sql && node seeds/index.js",
     "start": "node server.js"
   },
   "author": "",
