@@ -3,30 +3,19 @@ const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 
-// router.get('/', (req, res) => {
-//   Category.findAll({
-//     include: [{
-//       model: Product
-//     }]
-//   }).then(categoryData =>{
-//     res.json(categoryData)
-//   }).catch(err=>{
-//     console.log(err);
-//     res.status(500).json({msg:"error occurred",err})
-//   })
+router.get('/', (req, res) => {
+  Category.findAll({
+    include: [{
+      model: Product
+    }]
+  }).then(categoryData =>{
+    res.json(categoryData)
+  }).catch(err=>{
+    console.log(err);
+    res.status(500).json({msg:"error occurred",err})
+  })
 
-// });
-
-router.get('/', async (req,res) =>{
-  try{
-  const categoryData = await Category.findAll({
-    include: [{ model: Product }],
-  });
-  res.status(200).json(categoryData);
-}catch (err){
-  res.status(500).json(err);
-}
-})
+});
 
 router.get('/:id', (req, res) => {
   Category.findAll({
@@ -34,7 +23,7 @@ router.get('/:id', (req, res) => {
       id:req.params.id
     }
   }).then(category=>{
-    if(category.legth===0){
+    if(category.length===0){
       return res.status(404).json({msg:"no category with this ID in database."})
     }
     res.json(category)
